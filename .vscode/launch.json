@@ -1,19 +1,12 @@
 {
   "configurations": [
     {
-      "type": "aws-sam",
-      "request": "direct-invoke",
-      "name": "quake-arena-log:log-reader.open_file (python3.9)",
-      "invokeTarget": {
-        "target": "code",
-        "projectRoot": "${workspaceFolder}/",
-        "lambdaHandler": "log-reader.open_file"
-      },
-      "lambda": {
-        "runtime": "python3.9",
-        "payload": {},
-        "environmentVariables": {}
-      }
+      "name": "Python: Current File",
+      "type": "python",
+      "request": "launch",
+      "program": "${file}",
+      "console": "integratedTerminal",
+      "justMyCode": true
     }
   ]
 }
