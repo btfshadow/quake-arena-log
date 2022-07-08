@@ -1,0 +1,82 @@
+name: CI
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+  pull_request:
+
+# This allows a subsequently queued workflow run to interrupt previous runs
+concurrency:
+  group: '${{ github.workflow }} @ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}'
+  cancel-in-progress: true
+
+
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout application
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: '0'
+      -
+        name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      -
+        name: Setup poetry
+        run: pip3 install poetry
+      -
+        name: Install dependencies
+        run: poetry install
+      -
+        name: Execute lint
+        run: poetry run darker .
+
+  tests:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout application
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: '0'
+# TODO: make:tests
+      # -
+      #   name: Install dependencies
+      #   run: poetry run test
+
+      # -
+      #   name: Upload Coverage
+      #   uses: actions/upload-artifact@v3
+      #   with:
+      #     name: my-artifact
+      #     path: my_file.txt
+      #     retention-days: 5
+
+  Sonar:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Checkout application
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: '0' 
+      # -
+      #   name: Download Coverage      
+      #   uses: actions/download-artifact@v3
+      #   with:
+      #     name: my-artifact
+      #     path: path/to/artifact
+      - 
+        name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
