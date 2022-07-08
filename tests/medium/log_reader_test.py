@@ -9,7 +9,7 @@ def test_logreader():
     """
     log_reader = find_game_match(mock)
     assert list(log_reader.keys())[0] == 'mach_game_1'
-    assert len(log_reader['mach_game_1']) == 49
+    assert len(log_reader['mach_game_1']) == 97
 
 def test_find_round_game():
     """

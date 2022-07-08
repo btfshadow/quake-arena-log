@@ -7,4 +7,4 @@ def test_open_file():
     """
     file_name = "tests/medium/qgames.log"
     file_handle = open_file(file_name)
-    assert len(file_handle) == 49
+    assert len(file_handle) == 5307

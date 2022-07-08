@@ -13,7 +13,7 @@ def test_logreader():
     assert 'time_log' in list(data['mach_game_1']['round_game_log_1'].keys())
     assert 'weapon_kills' in list(data['mach_game_1']['round_game_log_1'].keys())
     assert 'total_kills' in list(data['mach_game_1']['round_game_log_1'].keys())
-    assert data['mach_game_1']['round_game_log_2']['total_kills'] == 10
-    assert data['mach_game_1']['round_game_log_2']['weapon_kills']['MOD_ROCKET_SPLASH'] == 1
+    assert data['mach_game_1']['round_game_log_2']['total_kills'] == 14
+    assert data['mach_game_1']['round_game_log_2']['weapon_kills']['MOD_ROCKET_SPLASH'] == 3
     assert 'Mocinha' in list(data['mach_game_1']['round_game_log_2']['KD'].keys())
     assert 'Isgalamido' in list(data['mach_game_1']['round_game_log_2']['KD'].keys())

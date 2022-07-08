@@ -68,7 +68,7 @@ jobs:
         with:
           name: coverage
           path: coverage.xml
-          retention-days: 5
+          retention-days: 1
 
   Sonar:
     runs-on: ubuntu-latest
@@ -84,10 +84,14 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: coverage
-          path: coverage.xml
+      -
+        name: Sed Coverage
+        run: sed -i 's/\.\//\/home\/runner\/work\/quake-arena-log\/quake-arena-log/' coverage.xml
       - 
         name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
+        with:
+          projectBaseDir: /home/runner/work/quake-arena-log/quake-arena-log
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
