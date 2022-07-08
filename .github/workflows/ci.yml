@@ -60,8 +60,8 @@ jobs:
       -
         name: Run Tests
         run: |
-        export PYTHONPATH=./
-        poetry run pytest tests --cov-config=.coveragerc --cov-report xml --cov=. 
+          export PYTHONPATH=./
+          poetry run pytest tests --cov-config=.coveragerc --cov-report xml --cov=. 
       -
         name: Upload Coverage
         uses: actions/upload-artifact@v3
